@@ -1,24 +1,14 @@
 const mongoose = require('mongoose');
-const reviewSchema = mongoose.Schema(
+const reviewsSchema = mongoose.Schema(
   {
-    name: {
-      type: String,
-      required: true,
-    },
-    rating: {
-      type: Number,
-      required: true,
-    },
-    comment: {
-      type: String,
-      required: true,
-    },
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
   },
   {
     timestamps: true,
   }
 );
-
 const productSchema = mongoose.Schema(
   {
     user: {
@@ -34,6 +24,7 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+
     category: {
       type: String,
       required: true,
@@ -42,7 +33,8 @@ const productSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    review: [reviewSchema],
+    reviews: [reviewsSchema],
+
     rating: {
       type: Number,
       required: true,
@@ -56,7 +48,6 @@ const productSchema = mongoose.Schema(
     price: {
       type: Number,
       required: true,
-      default: 0,
     },
     countInStock: {
       type: Number,
@@ -68,5 +59,5 @@ const productSchema = mongoose.Schema(
     timestamps: true,
   }
 );
-const Product = mongoose.model.apply('Product', productSchema);
+const Product = mongoose.model('Product', productSchema);
 module.exports = Product;
