@@ -17,3 +17,4 @@ const users = [
     password: bcrypt.hashSync('12345', 10),
   },
 ];
+module.exports = users;
