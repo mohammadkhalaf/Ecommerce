@@ -13,7 +13,7 @@ app.use(
 );
 
 const router = require('./routes/productRoutes');
-const userRouter = require('./routes/userRoute');
+const { userRouter } = require('./routes/userRoute');
 const connectDB = require('./db/db');
 
 dotenv.config();
