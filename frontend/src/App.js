@@ -9,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './pages/HomePage';
 import Product from './pages/Product';
 import Cart from './pages/Cart';
+import LoginPage from './pages/LoginPage';
+import CreateUser from './pages/CreateUser';
+import ProfilePage from './pages/ProfilePage';
 
 const App = () => {
   return (
@@ -19,7 +22,10 @@ const App = () => {
           <Container>
             <Routes>
               <Route path='/' element={<HomePage />} />
+              <Route path='/profile' element={<ProfilePage />} />
               <Route path='/product/:id' element={<Product />} />
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='/register' element={<CreateUser />} />
               <Route path='/cart'>
                 <Route path=':id' element={<Cart />} />
                 <Route path='' element={<Cart />} />

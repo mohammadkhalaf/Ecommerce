@@ -35,6 +35,26 @@ const getUserProfile = expressAsyncHandler(async (req, res) => {
     res.status(404).send('user is not found ');
   }
 });
+const updateProfile = expressAsyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const updateUser = await user.save();
+    res.json({
+      _id: updateUser._id,
+      name: updateUser.name,
+      email: updateUser.email,
+      isAdmin: updateUser.isAdmin,
+      token: generateToken(user._id),
+    });
+  } else {
+    res.status(404).send('user is not found ');
+  }
+});
 
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { email, password, name } = req.body;
@@ -60,6 +80,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
   }
 });
 userRouter.post('/', registerUser);
+userRouter.put('/profile', protect, updateProfile);
 userRouter.post('/login', authUser);
 userRouter.get('/profile', protect, getUserProfile);
 module.exports = { userRouter };
